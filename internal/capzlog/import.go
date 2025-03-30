@@ -61,8 +61,9 @@ func capzlogMapFlight(id, registration string, pf vuela.PilotFunction, fr *vuela
 		if fr.Instructor.Id != "" {
 			pname = &fr.Instructor.LastName
 			pfunc = models.PilotFunctionsDual
+		} else { // PIC+SELF (pilot name still required by the Capzlog API in this case)
+			pname = &fr.Pilot.LastName
 		}
-		// else PIC+SELF
 	} else if pf == vuela.PilotFunctionInstructor {
 		pfunc = models.PilotFunctionsInstructorOnPilotSeat
 		withStudent := models.NewMarkerType(models.MarkerTypeWithStudent)
