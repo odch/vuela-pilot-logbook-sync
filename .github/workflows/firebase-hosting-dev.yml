@@ -1,0 +1,49 @@
+name: Deploy to Firebase Functions on merge (dev)
+'on':
+  push:
+    branches:
+      - main
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment:
+          - dev
+    environment: ${{ matrix.environment }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      - name: Install Google Cloud SDK components
+        run: |
+          gcloud components install beta
+
+      - name: Configure Google Cloud Project
+        run: |
+          gcloud config set project ${{ vars.FIREBASE_PROJECT }}
+
+      - name: Deploy Firebase Function (Go)
+        run: |
+          gcloud functions deploy syncPilotLogBook \
+            --entry-point SyncPilotLogBook \
+            --trigger-location europe-west1 \
+            --trigger-event=providers/cloud.firestore/eventTypes/document.write \
+            --trigger-resource "projects/_/databases/(default)/documents/pilotLogbookSync/{sync}" \
+            --runtime go121 \
+            --set-env-vars=CAPZLOG_HOST=${{ vars.CAPZLOG_HOST }}
+          gcloud functions deploy activatePilotLogBookSync \
+            --entry-point ActivatePilotLogBookSync \
+            --trigger-event=providers/cloud.firestore/eventTypes/document.write \
+            --trigger-resource "projects/_/databases/(default)/documents/users/{user}" \
+            --runtime go121 \
+            --set-env-vars=CAPZLOG_HOST=${{ vars.CAPZLOG_HOST }}
+          gcloud functions deploy SyncPilotLookbookWebhook \
+            --runtime go121 \
+            --trigger-http \
+            --set-env-vars=CAPZLOG_HOST=${{ vars.CAPZLOG_HOST }}
