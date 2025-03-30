@@ -34,13 +34,13 @@ jobs:
             --entry-point SyncPilotLogBook \
             --trigger-location europe-west1 \
             --trigger-event=providers/cloud.firestore/eventTypes/document.write \
-            --trigger-resource "projects/_/databases/(default)/documents/pilotLogbookSync/{sync}" \
+            --trigger-resource "projects/${{ vars.FIREBASE_PROJECT }}/databases/(default)/documents/pilotLogbookSync/{sync}" \
             --runtime go121 \
             --set-env-vars=CAPZLOG_HOST=${{ vars.CAPZLOG_HOST }}
           gcloud functions deploy activatePilotLogBookSync \
             --entry-point ActivatePilotLogBookSync \
             --trigger-event=providers/cloud.firestore/eventTypes/document.write \
-            --trigger-resource "projects/_/databases/(default)/documents/users/{user}" \
+            --trigger-resource "projects/${{ vars.FIREBASE_PROJECT }}/databases/(default)/documents/users/{user}" \
             --runtime go121 \
             --set-env-vars=CAPZLOG_HOST=${{ vars.CAPZLOG_HOST }}
           gcloud functions deploy SyncPilotLookbookWebhook \
