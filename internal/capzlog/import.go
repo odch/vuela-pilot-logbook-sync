@@ -56,15 +56,14 @@ func capzlogMapTOF(s string) *models.FlightTypes {
 func capzlogMapFlight(id, registration string, pf vuela.PilotFunction, fr *vuela.FlightLogRecord) (*models.FlightInputBase, error) {
 	markers := make([]*models.Marker, 0)
 	pfunc := models.PilotFunctionsPIC
-	var pname *string
+	pname := &fr.Pilot.LastName
 	if pf == vuela.PilotFunctionPilot {
 		if fr.Instructor.Id != "" {
 			pname = &fr.Instructor.LastName
 			pfunc = models.PilotFunctionsDual
-		} else { // PIC+SELF (pilot name still required by the Capzlog API in this case)
-			pname = &fr.Pilot.LastName
 		}
 	} else if pf == vuela.PilotFunctionInstructor {
+		pname = &fr.Instructor.LastName
 		pfunc = models.PilotFunctionsInstructorOnPilotSeat
 		withStudent := models.NewMarkerType(models.MarkerTypeWithStudent)
 		markers = append(markers, &models.Marker{
