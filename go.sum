@@ -189,6 +189,12 @@ github.com/montanaflynn/stats v0.0.0-20171201202039-1bf9dbcd8cbe/go.mod h1:wL8QJ
 github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e/go.mod h1:zD1mROLANZcx1PVRCS0qkT7pwLkGfwJo4zjcN/Tysno=
 github.com/odch/go-capzlog v0.0.0-20230803150513-4e29149264df h1:G1fYislYWy+zf/6rwok+ZTjJba0N7DIakP4RJVCbzmo=
 github.com/odch/go-capzlog v0.0.0-20230803150513-4e29149264df/go.mod h1:XXiOdDvBO8aF60RrV/oaYSQTHxz8u2db14UipgWgrq4=
+github.com/odch/go-capzlog v0.0.0-20250330130457-c9eab26193ee h1:mE27NbUwrOJ5fo5cDvbZAfVF9/VFyPF/gudxCq+AqkY=
+github.com/odch/go-capzlog v0.0.0-20250330130457-c9eab26193ee/go.mod h1:XXiOdDvBO8aF60RrV/oaYSQTHxz8u2db14UipgWgrq4=
+github.com/odch/go-capzlog v0.0.0-20250330133609-8b409d287e0b h1:6aIvO+UkyfpagE2+9jYR3WBfkAHEIsS2XpJ3sbzHmXY=
+github.com/odch/go-capzlog v0.0.0-20250330133609-8b409d287e0b/go.mod h1:XXiOdDvBO8aF60RrV/oaYSQTHxz8u2db14UipgWgrq4=
+github.com/odch/go-capzlog v0.0.0-20250330135504-3a561b319720 h1:3xX1KeXz4qh6avz4YLkIK1WLWQAxCfkPpHFahjFqOko=
+github.com/odch/go-capzlog v0.0.0-20250330135504-3a561b319720/go.mod h1:XXiOdDvBO8aF60RrV/oaYSQTHxz8u2db14UipgWgrq4=
 github.com/odch/go-mycontrol v0.0.0-20230809112931-41aceed2752f h1:giB7C1NxlocsVs+jbTe1fzO02IjPGG7SFv9tqp+fiUo=
 github.com/odch/go-mycontrol v0.0.0-20230809112931-41aceed2752f/go.mod h1:NfmtZ9UbeMlRb2vtKEhDpppLUKLBNHbYOKmCuO2bCkk=
 github.com/odch/go-mycontrol v0.0.0-20230809145920-77e18869ddea h1:PtJbN4NE/gy2kPArloHo2F/Oe0AzI8FAobD+b5UXtTs=
