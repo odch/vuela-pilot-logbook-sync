@@ -9,7 +9,7 @@ require (
 	github.com/go-openapi/runtime v0.26.0
 	github.com/go-openapi/strfmt v0.21.7
 	github.com/mitchellh/mapstructure v1.5.0
-	github.com/odch/go-capzlog v0.0.0-20230803150513-4e29149264df
+	github.com/odch/go-capzlog v0.0.0-20250330135504-3a561b319720
 	github.com/odch/go-mycontrol v0.0.0-20230809145920-77e18869ddea
 	github.com/stretchr/testify v1.8.4
 	google.golang.org/api v0.133.0
