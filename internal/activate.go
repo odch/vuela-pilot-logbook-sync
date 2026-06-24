@@ -7,6 +7,7 @@ import (
 
 	"cloud.google.com/go/firestore"
 	"github.com/odch/aircraft-logbook/functions-go/flightsync/internal/capzlog"
+	"github.com/odch/aircraft-logbook/functions-go/flightsync/internal/mock"
 	"github.com/odch/aircraft-logbook/functions-go/flightsync/internal/mycontrol"
 )
 
@@ -31,6 +32,8 @@ func EnableSync(ctx context.Context, client *firestore.Client, userId, system, a
 		status, description, err = capzlog.ActivateUser(apiKey, systemInstanceIdentifier)
 	case systemMycontrol:
 		status, description, err = mycontrol.ActivateUser(apiKey)
+	case systemMock:
+		status, description, err = mock.ActivateUser(apiKey)
 
 	default:
 		err = fmt.Errorf("system %s not yet supported", system)

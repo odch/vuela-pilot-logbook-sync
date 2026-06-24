@@ -9,6 +9,7 @@ import (
 	"cloud.google.com/go/firestore"
 	"github.com/mitchellh/mapstructure"
 	"github.com/odch/aircraft-logbook/functions-go/flightsync/internal/capzlog"
+	"github.com/odch/aircraft-logbook/functions-go/flightsync/internal/mock"
 	"github.com/odch/aircraft-logbook/functions-go/flightsync/internal/mycontrol"
 	"github.com/odch/aircraft-logbook/functions-go/flightsync/internal/vuela"
 )
@@ -117,6 +118,8 @@ func syncUser(ctx context.Context, client *firestore.Client, ref *firestore.Docu
 		err = capzlog.Import(user.PilotLogbookSync.ApiKey, systemInstanceIdentifier, id, registration, pf, f)
 	case systemMycontrol:
 		err = mycontrol.Import(user.PilotLogbookSync.ApiKey, id, registration, pf, f)
+	case systemMock:
+		err = mock.Import(user.PilotLogbookSync.ApiKey, id, registration, pf, f)
 	default:
 		err = fmt.Errorf("invalid sync system: %v", sync.Type)
 	}
