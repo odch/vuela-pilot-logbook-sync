@@ -31,19 +31,29 @@ jobs:
       - name: Deploy Firebase Function (Go)
         run: |
           gcloud functions deploy syncPilotLogBook \
+            --gen2 \
+            --region europe-west1 \
+            --runtime go124 \
             --entry-point SyncPilotLogBook \
-            --trigger-location europe-west1 \
-            --trigger-event=providers/cloud.firestore/eventTypes/document.write \
-            --trigger-resource "projects/${{ vars.FIREBASE_PROJECT }}/databases/(default)/documents/pilotLogbookSync/{sync}" \
-            --runtime go121 \
+            --trigger-location nam5 \
+            --trigger-event-filters="type=google.cloud.firestore.document.v1.written" \
+            --trigger-event-filters="database=(default)" \
+            --trigger-event-filters-path-pattern="document=pilotLogbookSync/{sync}" \
             --set-env-vars=CAPZLOG_HOST=${{ vars.CAPZLOG_HOST }}
           gcloud functions deploy activatePilotLogBookSync \
+            --gen2 \
+            --region europe-west1 \
+            --runtime go124 \
             --entry-point ActivatePilotLogBookSync \
-            --trigger-event=providers/cloud.firestore/eventTypes/document.write \
-            --trigger-resource "projects/${{ vars.FIREBASE_PROJECT }}/databases/(default)/documents/users/{user}" \
-            --runtime go121 \
+            --trigger-location nam5 \
+            --trigger-event-filters="type=google.cloud.firestore.document.v1.written" \
+            --trigger-event-filters="database=(default)" \
+            --trigger-event-filters-path-pattern="document=users/{user}" \
             --set-env-vars=CAPZLOG_HOST=${{ vars.CAPZLOG_HOST }}
           gcloud functions deploy SyncPilotLookbookWebhook \
-            --runtime go121 \
+            --gen2 \
+            --region europe-west1 \
+            --runtime go124 \
+            --entry-point SyncPilotLookbookWebhook \
             --trigger-http \
             --set-env-vars=CAPZLOG_HOST=${{ vars.CAPZLOG_HOST }}
